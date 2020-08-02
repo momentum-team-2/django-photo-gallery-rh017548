@@ -1,0 +1,16 @@
+
+
+{% block content %}
+
+
+
+<div>
+  <form enctype="multipart/form-data"  action="{% url 'add_photo' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+      <button  type="submit">add photo</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

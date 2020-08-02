@@ -36,6 +36,17 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 category = "main"
+description = "A helper class for handling configuration defaults of packaged apps gracefully."
+name = "django-appconf"
+optional = false
+python-versions = "*"
+version = "1.0.4"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
+category = "main"
 description = "A configurable set of panels that display various debug information about the current request/response."
 name = "django-debug-toolbar"
 optional = false
@@ -78,6 +89,48 @@ dj-database-url = ">=0.5.0"
 django = "*"
 psycopg2 = "*"
 whitenoise = "*"
+
+[[package]]
+category = "main"
+description = "Automated image processing for Django models."
+name = "django-imagekit"
+optional = false
+python-versions = "*"
+version = "4.0.2"
+
+[package.dependencies]
+django-appconf = ">=0.5"
+pilkit = ">=0.2.0"
+six = "*"
+
+[package.extras]
+async = ["django-celery (>=3.0)"]
+async_rq = ["django-rq (>=0.6.0)"]
+
+[[package]]
+category = "main"
+description = "WSGI HTTP Server for UNIX"
+name = "gunicorn"
+optional = false
+python-versions = ">=3.4"
+version = "20.0.4"
+
+[package.dependencies]
+setuptools = ">=3.0"
+
+[package.extras]
+eventlet = ["eventlet (>=0.9.7)"]
+gevent = ["gevent (>=0.13)"]
+setproctitle = ["setproctitle"]
+tornado = ["tornado (>=0.2)"]
+
+[[package]]
+category = "main"
+description = "A collection of utilities and processors for the Python Imaging Libary."
+name = "pilkit"
+optional = false
+python-versions = "*"
+version = "2.0"
 
 [[package]]
 category = "main"
@@ -143,8 +196,8 @@ version = "5.1.0"
 brotli = ["brotli"]
 
 [metadata]
-content-hash = "52e1fd107675c0cc6703c46e4b586207490bfcac23f224c0835d0df3db6323da"
-python-versions = "^3.7"
+content-hash = "0e0c2296918d8983e1baa906f5e980e10f14ff3ed6f62331df6ea92f64a3dbe2"
+python-versions = "3.7.7"
 
 [metadata.files]
 asgiref = [
@@ -158,6 +211,10 @@ dj-database-url = [
 django = [
     {file = "Django-3.0.8-py3-none-any.whl", hash = "sha256:5457fc953ec560c5521b41fad9e6734a4668b7ba205832191bbdff40ec61073c"},
     {file = "Django-3.0.8.tar.gz", hash = "sha256:31a5fbbea5fc71c99e288ec0b2f00302a0a92c44b13ede80b73a6a4d6d205582"},
+]
+django-appconf = [
+    {file = "django-appconf-1.0.4.tar.gz", hash = "sha256:be58deb54a43d77d2e1621fe59f787681376d3cd0b8bd8e4758ef6c3a6453380"},
+    {file = "django_appconf-1.0.4-py2.py3-none-any.whl", hash = "sha256:1b1d0e1069c843ebe8ae5aa48ec52403b1440402b320c3e3a206a0907e97bb06"},
 ]
 django-debug-toolbar = [
     {file = "django-debug-toolbar-2.2.tar.gz", hash = "sha256:eabbefe89881bbe4ca7c980ff102e3c35c8e8ad6eb725041f538988f2f39a943"},
@@ -174,6 +231,17 @@ django-extensions = [
 django-heroku = [
     {file = "django-heroku-0.3.1.tar.gz", hash = "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"},
     {file = "django_heroku-0.3.1-py2.py3-none-any.whl", hash = "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762"},
+]
+django-imagekit = [
+    {file = "django-imagekit-4.0.2.tar.gz", hash = "sha256:6ec0afb77cdf52cd453c9fc2c10ef350d111edfd6ce53c5977aa8a0e22cee00c"},
+    {file = "django_imagekit-4.0.2-py2.py3-none-any.whl", hash = "sha256:304c3379f6a5cac387e47ace11195a603ad3cb01e3e951b45489824d25b00359"},
+]
+gunicorn = [
+    {file = "gunicorn-20.0.4-py2.py3-none-any.whl", hash = "sha256:cd4a810dd51bf497552cf3f863b575dabd73d6ad6a91075b65936b151cbf4f9c"},
+    {file = "gunicorn-20.0.4.tar.gz", hash = "sha256:1904bb2b8a43658807108d59c3f3d56c2b6121a701161de0ddf9ad140073c626"},
+]
+pilkit = [
+    {file = "pilkit-2.0.tar.gz", hash = "sha256:ddb30c2f0198a147e56b151476c3bb9fe045fbfd5b0a0fa2a3148dba62d1559f"},
 ]
 pillow = [
     {file = "Pillow-7.2.0-cp35-cp35m-macosx_10_10_intel.whl", hash = "sha256:1ca594126d3c4def54babee699c055a913efb01e106c309fa6b04405d474d5ae"},

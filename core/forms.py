@@ -8,4 +8,6 @@ class PictureForm(ModelForm):
         fields = [
             'title',
             'photo',
+            'public',
+            'owner',
         ]
