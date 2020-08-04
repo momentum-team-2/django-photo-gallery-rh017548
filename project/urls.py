@@ -22,7 +22,17 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('', core_views.home, name='home'),
+    path('core/', core_views.list_photo, name='list_photo'),
     path('core/add/', core_views.add_photo, name='add_photo'),
+    path('core/<int:pk>/edit/', core_views.edit_photo, name='edit_photo'),
+    path('core/<int:pk>/delete/', core_views.delete_photo, name='delete_photo'),
+    path('core/<int:pk>/show', core_views.show_photo, name = 'show_photo'),
+    path('albums/', core_views.list_album, name='list_album'),
+    path('albums/add/', core_views.add_album, name='add_album'),
+    path('albums/<int:pk>/', core_views.show_album, name='show_album'),
+    path('albums/<int:pk>/edit/', core_views.edit_album, name='edit_album'),
+    path('albums/<int:pk>/delete/', core_views.delete_album, name='delete_album'),
+
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

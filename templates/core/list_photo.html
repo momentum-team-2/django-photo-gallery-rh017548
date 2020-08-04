@@ -8,8 +8,8 @@
     <div>
         {% if photo.photo and photo.public %}
         <a href="{% url 'show_photo' pk=photo.pk %}">
-        <img src="{{ photo.photo_thumbnail.url }}" />
-        </a>
+          <img src="{{ photo.photo_thumbnail.url }}" />
+          </a>
         {% endif %}
 
     </div>
