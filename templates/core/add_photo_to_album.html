@@ -1,0 +1,28 @@
+{% block content %}
+
+<header class="masthead mb-auto">
+    <main role="main" class="inner cover">
+      <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+          <h1 class="display-4 font-weight-normal">Add Photo to Album</h1>
+          <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple’s marketing pages.</p>
+          <a class="btn btn-outline-secondary" href="{% url 'list_album' %}">Albums</a>
+        </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+      </div> 
+      </main>
+       </nav>
+</header>
+
+
+<div class="mt2 mb0 f6 fw4 ttu tracked tc mw7 center mt4">
+  <form class="mt2 mb0 f6 fw4 ttu tracked center " action="{% url 'add_photo_to_album' pk=album.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+      <button class="btn btn-outline-secondary" type="submit">Upload</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% block content %}
+
+            {% if album.title %}
+          <h1>{{ album.title }}</h1>
+          <a  href="{% url 'add_photo_to_album' pk=album.pk %}">Add Photo</a>
+          <a  href="{% url 'delete_album' pk=album.pk  %}">Delete Album</a>
+          <a  href="{% url 'list_album'  %}">All Albums</a>
+          <br>
+          {% endif %} 
+          <div class="flex flex-wrap">
+            {% for photo in picture.photos %}
+           
+            <div>
+                 
+          
+          
+              {% if photo.photo %}
+              <div class="flex "><img src="{{ photo.photo_thumbnail.url }}"></div>
+              {% endif %}
+          
+              <br>
+              
+              <p>
+                  
+                  <a style="text-decoration:none" class="black-90" href="{% url 'delete_photo' pk=photo.pk %}">delete</a><br>
+              </p>
+             
+            </div>
+            {% endfor %}
+{% endblock %}

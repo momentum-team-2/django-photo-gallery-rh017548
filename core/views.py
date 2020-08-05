@@ -51,7 +51,6 @@ def delete_photo(request, pk):
 
 def list_photo(request):
     photos = Picture.objects.all()
-    # answers = request.user.response.all()
     
     return render(request, 'core/list_photo.html', {'photos': photos})
 
@@ -122,3 +121,22 @@ def delete_album(request, pk):
         return redirect(to='list_album')
 
     return render(request, 'core/delete_album.html', {'album': album })
+
+
+def add_photo_to_album(request, pk):
+    album = get_object_or_404(request.user.albums, pk=pk)
+
+    if request.method == 'POST':
+        form = PictureForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            photo = form.instance
+            photo.owner = request.user
+            photo.album = album
+            photo.save()
+            album.photos.add(photo)
+        
+            return redirect(to='show_album', pk=pk)
+    else:
+        form = PictureForm()
+    
+    return render(request, 'core/add_photo_to_album.html', {'form': form, 'album': album})

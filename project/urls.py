@@ -32,9 +32,16 @@ urlpatterns = [
     path('albums/<int:pk>/', core_views.show_album, name='show_album'),
     path('albums/<int:pk>/edit/', core_views.edit_album, name='edit_album'),
     path('albums/<int:pk>/delete/', core_views.delete_album, name='delete_album'),
+    path('albums/<int:pk>/add/photo/', core_views.add_photo_to_album, name='add_photo_to_album'),
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('api/', include('api.urls')),
 
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
+    path('api-auth/', include('rest_framework.urls')),
+]
 
 if settings.DEBUG:
     import debug_toolbar

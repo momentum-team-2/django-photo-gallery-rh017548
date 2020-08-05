@@ -46,16 +46,30 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
 
     # Third-party
     'debug_toolbar',
     'django_extensions',
     'imagekit',
+    'registration',
+    'rest_framework',
+    'rest_framework.authtoken',
+    
 
     # Project-specific
     'users',
     'core',
+    'api',
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+}
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -143,6 +157,11 @@ INTERNAL_IPS = [
     '127.0.0.1',
     # ...
 ]
+
+ACCOUNT_ACTIVATION_DAYS = 14
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 # Configure Django App for Heroku.
 import django_heroku
 django_heroku.settings(locals())

@@ -1,0 +1,10 @@
+{% block content %}
+{% for album in albums %}
+<h2><a style="text-decoration:none" href="{% url 'show_album' pk=album.pk %}">{{ album.title }}</h2></a>
+{% if album.photos %}
+<div class=""><img src="{{ album.featured_photo.photo_thumbnail.url }}"></div>
+
+{% endif %}
+{% endfor %}
+
+{% endblock %}
