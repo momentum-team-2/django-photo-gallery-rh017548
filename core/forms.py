@@ -9,7 +9,7 @@ class PictureForm(ModelForm):
             'title',
             'photo',
             'public',
-            'owner',
+            
         ]
 
 
@@ -20,7 +20,7 @@ class AlbumForm(ModelForm):
             'title',
             'featured_photo',
             'public',
-            'owner',
+            
         ]
 
 

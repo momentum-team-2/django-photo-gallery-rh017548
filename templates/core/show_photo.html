@@ -1,10 +1,33 @@
+{% extends "base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
+<nav class="flex justify-between bb b--black-10">
+  <a class="link black-70 hover-black no-underline flex items-center pa3" href="">
+    <svg
+      class="dib h1 w1"
+      data-icon="grid"
+      viewBox="0 0 32 32"
+      style="fill:black">
+      <title>Super Normal Icon Mark</title>
+      <path d="M2 2 L10 2 L10 10 L2 10z M12 2 L20 2 L20 10 L12 10z M22 2 L30 2 L30 10 L22 10z M2 12 L10 12 L10 20 L2 20z M12 12 L20 12 L20 20 L12 20z M22 12 L30 12 L30 20 L22 20z M2 22 L10 22 L10 30 L2 30z M12 22 L20 22 L20 30 L12 30z M22 22 L30 22 L30 30 L22 30z">
+      </path>
+    </svg>
+  </a>
+  <div class="flex-grow pa3 flex items-center">
+    <a class="f6 link dib black dim mr3 mr4-ns" href="{% url 'list_photo' %}">Public Photos</a>
+    <a class="f6 link dib black dim mr3 mr4-ns" href="{% url 'edit_photo' pk=photo.pk %}">Edit</a>
+    <a class="f6 link dib black dim mr3 mr4-ns" href="{% url 'delete_photo' pk=photo.pk %}">Delete</a>
+    <a class="f6 link dib black dim mr3 mr4-ns" href="{% url 'my_photo' %}">My Photos</a>
+    <a class="f6 link dib black dim mr3 mr4-ns" href="{% url 'list_album' %}">My Albums</a>
+    <a class="f6 link dib black dim mr3 mr4-ns" href="{% url 'add_photo' %}">Upload Photo</a>
+    <a class="f6 dib black bg-animate hover-bg-black hover-black no-underline pv2 ph4 br-pill ba b--black-20" href="{% url 'auth_logout' %}">Log Out</a>
+  </div>
+</nav>
+
 {% if photo.photo_thumbnail %}
-    <a style="text-decoration:none" href="{% url 'show_photo' pk=photo.pk %}"><b>Goal:</b> <img src="{{ photo.photo_thumbnail.url }}"> </a>
-    <p>
-        <i ></i>
-        <a style="text-decoration:none"  href="{% url 'delete_photo' pk=photo.pk %}">delete photo</a>
-    </p>
+
+    <a style="text-decoration:none" href="{% url 'show_photo' pk=photo.pk %}"><img src="{{ photo.photo_large.url }}"></a>
+    
 {% endif %}
 
 <!-- comments -->
@@ -12,7 +35,7 @@
 
 <h3>Leave a comment</h3>
 <form enctype="multipart/form-data" method="post" style="margin-top: 1.3em;">
-  {{ comment_form.as_p }}
+  {{ comment_form | crispy }}
   {% csrf_token %}
   <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
 </form>

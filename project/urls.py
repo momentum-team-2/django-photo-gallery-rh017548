@@ -23,6 +23,7 @@ from django.conf.urls import include
 urlpatterns = [
     path('', core_views.home, name='home'),
     path('core/', core_views.list_photo, name='list_photo'),
+    path('core/my/', core_views.my_photo, name='my_photo'),
     path('core/add/', core_views.add_photo, name='add_photo'),
     path('core/<int:pk>/edit/', core_views.edit_photo, name='edit_photo'),
     path('core/<int:pk>/delete/', core_views.delete_photo, name='delete_photo'),

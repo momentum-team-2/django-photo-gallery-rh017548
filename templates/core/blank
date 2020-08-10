@@ -1,0 +1,3 @@
+ <a href="{% url 'show_photo' pk=photo.pk %}">
+        <img src="{{ photo.photo_thumbnail.url }}" alt="Girl in a jacket">
+        </a>

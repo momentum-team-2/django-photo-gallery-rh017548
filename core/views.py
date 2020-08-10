@@ -5,6 +5,8 @@ from django.views import View
 from users.models import User
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -16,7 +18,7 @@ def home(request):
         return redirect('list_photo')
     return render(request, 'core/home.html', {'photos': photos, 'form': form})
 
-
+@login_required
 def add_photo(request):
     if request.method == 'POST':
         form = PictureForm(data=request.POST, files=request.FILES)
@@ -29,7 +31,7 @@ def add_photo(request):
         form = PictureForm()
     return render(request, 'core/add_photo.html', {'form': form})
 
-
+@login_required
 def edit_photo(request, pk):
     photo = get_object_or_404(request.user.photos, pk=pk)
     if request.method == 'POST':
@@ -38,7 +40,7 @@ def edit_photo(request, pk):
             photo = form.save()
             return redirect(to='list_photo')
 
-
+@login_required
 def delete_photo(request, pk):
     photo = get_object_or_404(request.user.photos, pk=pk)
     if request.method == 'POST':
@@ -48,13 +50,19 @@ def delete_photo(request, pk):
     
     return render(request, 'core/delete_photo.html', {'photo': photo})
     
-
+@login_required
 def list_photo(request):
     photos = Picture.objects.all()
     
     return render(request, 'core/list_photo.html', {'photos': photos})
+@login_required
+def my_photo(request):
+    photos = request.user.photos.all()
+    form = PictureForm()
+    return render(request, 'core/my_photo.html', {'photos': photos, 'form': form})
 
 
+@login_required
 def show_photo(request, pk):
     photo = get_object_or_404(Picture.objects.all(), pk=pk)
     comments = photo.comments.order_by('created_on')
@@ -74,7 +82,7 @@ def show_photo(request, pk):
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
 
-
+@login_required
 def add_album(request):
     if request.method == 'POST':
         form = AlbumForm(data=request.POST, files=request.FILES)
@@ -87,20 +95,20 @@ def add_album(request):
         form = AlbumForm()
     return render(request, 'core/add_album.html', {'form': form})
 
-
+@login_required
 def list_album(request):
     albums = request.user.albums.all()
     form = AlbumForm()
     return render(request, 'core/list_album.html', {'albums': albums, 'form':form})
 
-
+@login_required
 def show_album(request, pk):
     album = get_object_or_404(request.user.albums, pk=pk)
     form = AlbumForm()
-    photos = album.photos.all().order_by('uploaded_at')
+    photos = album.photos.all()
     return render(request, 'core/show_album.html', {'album': album, 'pk': pk, 'form': form, 'photos': photos,})
 
-
+@login_required
 def edit_album(request, pk):
     album = get_object_or_404(request.user.albums, pk=pk)
     if request.method == 'POST':
@@ -112,7 +120,7 @@ def edit_album(request, pk):
         form = AlbumForm(instance=album)
     return render(request, 'core/edit_album.html', {'form': form, 'album': album})
 
-
+@login_required
 def delete_album(request, pk):
     album = get_object_or_404(request.user.albums, pk=pk)
     if request.method == 'POST':
@@ -122,7 +130,7 @@ def delete_album(request, pk):
 
     return render(request, 'core/delete_album.html', {'album': album })
 
-
+@login_required
 def add_photo_to_album(request, pk):
     album = get_object_or_404(request.user.albums, pk=pk)
 

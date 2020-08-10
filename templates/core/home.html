@@ -1,27 +1,53 @@
+{% extends "base.html" %}
 {% block content %}
-<h1>Hello world</h1>
-<a  href={% url 'add_photo' %}>Add Photo</a>
 
+<nav class="flex justify-between bb b--black-10">
+  <a class="link black-70 hover-black no-underline flex items-center pa3" href="">
+    <svg
+      class="dib h1 w1"
+      data-icon="grid"
+      viewBox="0 0 32 32"
+      style="fill:black">
+      <title>Super Normal Icon Mark</title>
+      <path d="M2 2 L10 2 L10 10 L2 10z M12 2 L20 2 L20 10 L12 10z M22 2 L30 2 L30 10 L22 10z M2 12 L10 12 L10 20 L2 20z M12 12 L20 12 L20 20 L12 20z M22 12 L30 12 L30 20 L22 20z M2 22 L10 22 L10 30 L2 30z M12 22 L20 22 L20 30 L12 30z M22 22 L30 22 L30 30 L22 30z">
+      </path>
+    </svg>
+  </a>
+  <div class="flex-grow pa3 flex items-center">
+    <a class="f6 link dib black dim mr3 mr4-ns" href={% url 'auth_login' %}>Sign In</a>
+    <a class="f6 dib black bg-animate hover-bg-black hover-black no-underline pv2 ph4 br-pill ba b--black-20" href={% url 'registration_register' %}>Sign Up</a>
+  </div>
+</nav>
 
-<div>
-  {% for photo in photos %}
+<div class = "grid flex">
+    {% for photo in photos %}
     <div>
         {% if photo.photo and photo.public %}
-        <a href="{% url 'show_photo' pk=photo.pk %}">
-        <img src="{{ photo.photo_thumbnail.url }}" />
-        </a>
+         <div >
+             <img src="{{ photo.photo_medium.url }}">
+        </div>
         {% endif %}
 
-    </div>
-    
-
-    
-
-  {% endfor %}
+       
 </div>
 
-<script>
+{% endfor %}
+</div>
+
+</div>
+<style>
   
+  .grid { 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  align-items: stretch;
+  justify-items: center;
   
-</script>
-{% endblock content %}
+  }
+.grid img {
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px  red;
+  max-width: 100%;
+  }
+{% endblock %}

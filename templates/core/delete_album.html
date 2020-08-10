@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<div class="mt2 mb0 f3 fw4 ttu tracked tc mw7 center mt4">
+  <form action="{% url 'delete_album' pk=album.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>Are you sure you want to delete "{{ album.title }}"?</p>
+    <div>
+        <i class="fa fa-trash"></i>
+        <button class="btn btn-outline-secondary" type="submit">Delete album</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

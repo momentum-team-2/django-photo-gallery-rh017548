@@ -27,6 +27,18 @@ class Picture(models.Model):
         format="JPEG",
         options={"quality": 60},
         )
+    photo_medium = ImageSpecField(
+        source="photo",
+        processors=[ResizeToFit(300, 300)],
+        format="JPEG",
+        options={"quality": 90},
+        )
+    photo_large = ImageSpecField(
+        source="photo",
+        processors=[ResizeToFit(800, 800)],
+        format="JPEG",
+        options={"quality": 100},
+        )
     uploaded_date = models.DateTimeField(auto_now_add=True)
     public = models.BooleanField(default=False)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='photos')
